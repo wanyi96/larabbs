@@ -29,8 +29,8 @@ class AddAvatarAndIntroductionToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumu('avatar');
-            $table->dropColumu('introduction');
+            $table->dropColumn('avatar');
+            $table->dropColumn('introduction');
         });
     }
 }
