@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Observers\UserObserver;
+use App\Observers\TopicObserver;
+use App\Models\Topic;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {

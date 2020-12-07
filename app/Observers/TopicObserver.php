@@ -22,6 +22,10 @@ class TopicObserver
     // 观察者类里的方法名对应 Eloquent 想监听的事件
     public function saving(Topic $topic)
     {
+        //过滤表单提交内容，HTMLPurifier白名单中未指定的html属性，css属性，html标签都会被过滤
+        //参数1是传入的数据，参数二是要过滤的规则，在配置文件中配置好
+        $topic->body = clean($topic->body,'user_topic_body');
+
         //根据body字段的内容来生成摘要字段的内容
         $topic->excerpt = make_excerpt($topic->body);
     }

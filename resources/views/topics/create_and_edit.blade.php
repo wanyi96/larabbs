@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('styles')
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/simditor.css') }}">
-@stop
-
 @section('content')
 <div class="container">
   <div class="col-md-10 offset-md-1">
@@ -68,6 +64,11 @@
   </div>
 </div>
 @stop
+
+@section('styles')
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/simditor.css') }}">
+@stop
+
 @section('scripts')
   <script type="text/javascript" src="{{ asset('js/module.js') }}"></script>
   <script type="text/javascript" src="{{ asset('js/hotkeys.js') }}"></script>
