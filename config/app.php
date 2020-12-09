@@ -69,6 +69,7 @@ return [
 
     'timezone' => 'Asia/Shanghai',
 
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
