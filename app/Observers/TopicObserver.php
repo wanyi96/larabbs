@@ -42,4 +42,13 @@ class TopicObserver
             dispatch(new TranslateSlug($topic));
         }
     }
+
+    public function deleted(Topic $topic)
+    {
+        //帖子删除后，数据库里的该帖子的回复数据也要删除
+        // $topic->replies->where('topic_id',$topic->id)->delete();
+        //在模型监听器中，数据库操作需要避免再次触发eloquent时间，以免造成逻辑冲突，无限套娃，所以使用DB类进行操作
+        \DB::table('replies')->where('topic_id',$topic->id)->delete();
+
+    }
 }
