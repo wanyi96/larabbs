@@ -18,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if (app()->isLocal()) {
+            $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
+        }
     }
 
     /**
@@ -33,5 +35,12 @@ class AppServiceProvider extends ServiceProvider
 		\App\Models\Topic::observe(\App\Observers\TopicObserver::class);
         Schema::defaultStringLength(191); //add fixed sql,队列执行报错，似乎是mysql版本过低，上网查了下，补充这行代码
         //
+
+        //Horizon访问权限
+        \Horizon::auth(function($request){
+            //判断是否是站长
+            return \Auth::user()->hasRole('Founder');
+        });
     }
+
 }
