@@ -73,4 +73,28 @@ class User extends Authenticatable implements MustVerifyEmailContract
         $this->save();
         $this->unreadNotifications->markAsRead();
     }
+
+    public function setPasswordAttribute($value)
+    {
+        //因为之前的插件，ResetPasswordController重置密码的时候，它会自动hash加密密码，
+        //所以要讲加密，未加密两种情况区分开来（以后说不定会有更多的地方会修改密码）
+        if(strlen($value != 60))
+        {
+            //长度不是60，则未经过加密
+            $value = bcrypt($value);
+        }
+        $this->attributes['password'] = $value;
+    }
+
+    public function setAvatarAttribute($path)
+    {
+        //如果不是'http'子串开头，那就是从管理后台上传的，需要补全URL
+        if(! \Str::startsWith($path, 'http')){
+
+            //拼接完整的url
+            $path = config('app.url') . '/uploads/images/avatars/' . $path;
+        }
+
+        $this->attributes['avatar'] = $path;
+    }
 }
