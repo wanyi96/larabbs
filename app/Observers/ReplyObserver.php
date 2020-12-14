@@ -25,10 +25,14 @@ class ReplyObserver
         //创建成功后计算本话题下评论总数，然后再对其reply_count字段赋值
         // $reply->topic->reply_count = $reply->topic->replies->count();
         // $reply->topic->save();
-        $this->topic->updateReplyCount();
 
-        //通知话题作者有新的评论
-        $reply->topic->user->notify(new TopicReplied($reply));
+        //运行迁移命令时不执行下列操作
+        if(!app()->runningInConsole() ){
+            $reply->topic->updateReplyCount();
+
+            //通知话题作者有新的评论
+            $reply->topic->user->notify(new TopicReplied($reply));
+        }
     }
 
     public function updating(Reply $reply)
