@@ -17,6 +17,8 @@ return [
     'permission'=> function()
     {
         return Auth::user()->can('manage_users');
+        // return Auth::user()->can('manage_contents');
+        // return \Auth::user()->hasRole('Founder');
     },
 
     // 字段负责渲染『数据表格』，由无数的『列』组成，

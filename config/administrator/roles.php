@@ -10,6 +10,7 @@ return [
     'permission'=> function()
     {
         return Auth::user()->can('manage_users');
+        // return \Auth::user()->hasRole('Founder');  //判断是否是站长
     },
 
     'columns' => [
