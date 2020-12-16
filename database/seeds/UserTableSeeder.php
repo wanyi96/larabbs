@@ -27,6 +27,6 @@ class UserTableSeeder extends Seeder
 
         //将2号用户指派为管理员
         $user = User::find(2);
-        $user->assignRole('Founder');
+        $user->assignRole('Maintainer');
     }
 }
